@@ -1,24 +1,34 @@
 package com.example.animalsound;
 
-import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.util.Random;
+
 
 public class MainActivity extends AppCompatActivity {
 
+    int[] images = {R.drawable.togo, R.drawable.penguin};
+    String[] texts = {"Togo", "Penguin"};
+    int[] colors = {Color.BLUE, Color.GREEN, Color.RED};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.m001_act_splash);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-    }
+
+        ImageView imageView = findViewById(R.id.imageView);
+        TextView textView = findViewById(R.id.textView);
+        LinearLayout mainLayout = findViewById(R.id.mainLayout);
+
+        Random random = new Random();
+        int randomIndex = random.nextInt(images.length);
+
+        imageView.setImageResource(images[randomIndex]);
+        textView.setText(texts[randomIndex]);
+        mainLayout.setBackgroundColor(colors[randomIndex]);
+    };
 }
